@@ -1,39 +1,31 @@
 package swexpertacademy.d3;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.util.Scanner;
 
 public class Solution1206 {
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		
-		int T = 0, N = 0, A = 0;
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
 		int leftView, rightView;
-		int[] buildings = null;
-		String[] temp = null;
-		
-		while(N < 10) {
-			A = 0;
-			T = Integer.parseInt(in.readLine());
-			temp = in.readLine().split(" ");
-			buildings = new int[T];
-			
-			for(int i = 0; i < temp.length; i++) {
-				buildings[i] = Integer.parseInt(temp[i]);
+
+		for (int i = 0; i < 10; i++) {
+			int testCase = in.nextInt();
+			int[] buildings = new int[testCase];
+			int view = 0;
+
+			for (int j = 0; j < testCase; j++) {
+				buildings[j] = in.nextInt();
 			}
-			
-			for(int i = 2; i < buildings.length - 2; i++) {
-				leftView = buildings[i] - Math.max(buildings[i-1], buildings[i-2]);
-				rightView = buildings[i] - Math.max(buildings[i+1], buildings[i+2]);
+
+			for (int j = 2; j < testCase - 2; j++) {
+				leftView = buildings[j] - Math.max(buildings[j - 1], buildings[j - 2]);
+				rightView = buildings[j] - Math.max(buildings[j + 1], buildings[j + 2]);
 
 				if (leftView > 0 && rightView > 0) {
-					A += Math.min(leftView, rightView);
+					view += Math.min(leftView, rightView);
 				}
 			}
-			
-			System.out.println("#" + (N+1) + " " + A);
-			N++;
+
+			System.out.println("#" + (i + 1) + " " + view);
 		}
 	}
 }
-
