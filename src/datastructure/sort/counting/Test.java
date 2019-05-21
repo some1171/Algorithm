@@ -54,11 +54,7 @@ public class Test {
 			temp[counts[arr[i]] - 1] = arr[i];
 			counts[arr[i]]--;
 		}
-		
-		arr = temp;
-		arr = Arrays.copyOf(temp, 8);
-		arr = temp.clone();
-		
+
 		return temp;
 	}
 	
