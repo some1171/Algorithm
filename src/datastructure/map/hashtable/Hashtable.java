@@ -3,6 +3,8 @@ package datastructure.map.hashtable;
 import java.util.LinkedList;
 
 /*
+ * HashMap : async, HashTable: sync
+ * 
  * Hash Table
  * f(key); hash function -> HashCode; Á¤¼ö-> Index; array -> Value; data
  * 
