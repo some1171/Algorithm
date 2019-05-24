@@ -39,7 +39,7 @@ public class Solution1216 {
 			}
 
 			outerLoop:
-			for (int length = 100; length > 0; length--) {
+			for (int length = 100; length > horizontalMaxLength; length--) {
 				for (int i = 0; i < 100; i++) {
 					for (int j = 0; j < 100 - length + 1; j++) {
 						int check = 0;
