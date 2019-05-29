@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 /*
+ * solution 1222, 1223, 1224 µø¿œ
+ * 
  * isp: in-stack precedence
  * icp: in-comming precedence
  * 
