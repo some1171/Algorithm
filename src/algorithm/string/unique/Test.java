@@ -1,9 +1,6 @@
 package algorithm.string.unique;
 
-import java.util.Arrays;
 import java.util.HashMap;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /*
  * Q. 문자열 고유한지
