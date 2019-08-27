@@ -1,4 +1,4 @@
-package acmicpc.p15683;
+package acmicpc.watch;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main15683 {
 	public static int N, M, K, minBlindSpot = 100;
 	public static LinkedList<Camera> camList = new LinkedList<Camera>();
 
@@ -33,7 +33,7 @@ public class Main {
 			}
 		}
 		K = camList.size();
-		Main main = new Main();
+		Main15683 main = new Main15683();
 		main.dfs(0, map);
 
 		bw.flush();

@@ -1,4 +1,4 @@
-package acmicpc.p15686;
+package acmicpc.chickendelivery;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
