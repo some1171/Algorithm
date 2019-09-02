@@ -50,16 +50,16 @@ public class Main15684 {
 		bw.close();
 	}
 	
-	public void dfs(int posR, int posC, boolean[][] nmap, int currentPeekCount, int totalPeekCount) {
+	public void dfs(int posR, int posC, boolean[][] nmap, int currentPickCount, int totalPickCount) {
 		if (isSuccess) {
 			return;
 		}
-		if (currentPeekCount == totalPeekCount) {
+		if (currentPickCount == totalPickCount) {
 			// 갯수 만큼 뽑기 완료
 			// 체크하고 종료
 			if (check(nmap)) {
 				isSuccess = true;
-				count = totalPeekCount;
+				count = totalPickCount;
 			}
 			return;
 		}
@@ -72,21 +72,21 @@ public class Main15684 {
 		if (!nmap[posR][posC]) {
 			nmap[posR][posC] = true;
 			if (posR == H) {
-				dfs(1, posC + 1, nmap, currentPeekCount + 1, totalPeekCount);
+				dfs(1, posC + 1, nmap, currentPickCount + 1, totalPickCount);
 			} else {
-				dfs(posR + 1, posC, nmap, currentPeekCount + 1, totalPeekCount);
+				dfs(posR + 1, posC, nmap, currentPickCount + 1, totalPickCount);
 			}
 			nmap[posR][posC] = false;
 			if (posR == H) {
-				dfs(1, posC + 1, nmap, currentPeekCount, totalPeekCount);
+				dfs(1, posC + 1, nmap, currentPickCount, totalPickCount);
 			} else {
-				dfs(posR + 1, posC, nmap, currentPeekCount, totalPeekCount);
+				dfs(posR + 1, posC, nmap, currentPickCount, totalPickCount);
 			}
 		} else {
 			if (posR == H) {
-				dfs(1, posC + 1, nmap, currentPeekCount, totalPeekCount);
+				dfs(1, posC + 1, nmap, currentPickCount, totalPickCount);
 			} else {
-				dfs(posR + 1, posC, nmap, currentPeekCount, totalPeekCount);
+				dfs(posR + 1, posC, nmap, currentPickCount, totalPickCount);
 			}
 		}
 	}

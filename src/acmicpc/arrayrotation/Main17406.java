@@ -28,17 +28,17 @@ public class Main17406 {
 			}
 		}
 		operators = new Operator[K];
-		int[] peek = new int[K];
+		int[] pick = new int[K];
 		for (int i = 0; i < K; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			int r = Integer.parseInt(st.nextToken()) - 1;
 			int c = Integer.parseInt(st.nextToken()) - 1;
 			int s = Integer.parseInt(st.nextToken());
 			operators[i] = new Operator(r, c, s);
-			peek[i] = i;
+			pick[i] = i;
 		}
 		
-		main.peek(0, K, K, peek);
+		main.pick(0, K, K, pick);
 		
 		bw.flush();
 		bw.write(min + "\n");
@@ -46,7 +46,7 @@ public class Main17406 {
 		bw.close();
 	}
 	
-	public void peek(int depth, int n, int k, int[] peek) {
+	public void pick(int depth, int n, int k, int[] pick) {
 		if (depth == k) {
 			// 다 뽑은 경우, 연산을 수행한다.
 			int[][] cmap = new int[N][M];
@@ -56,7 +56,7 @@ public class Main17406 {
 				}
 			}
 			for (int i = 0; i < K; i++) {
-				int operatorIndex = peek[i]; 
+				int operatorIndex = pick[i]; 
 				rotate(operatorIndex, cmap);
 			}
 			min = Math.min(min, getMin(cmap));
@@ -65,9 +65,9 @@ public class Main17406 {
 		}
 		
 		for (int i = depth; i < n; i++) {
-			swap(i, depth, peek);
-			peek(depth + 1, n, k, peek);
-			swap(i, depth, peek);
+			swap(i, depth, pick);
+			pick(depth + 1, n, k, pick);
+			swap(i, depth, pick);
 		}
 	}
 	

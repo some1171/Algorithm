@@ -41,7 +41,7 @@ public class Main14502 {
 				cmap[i][j] = map[i][j];
 			}
 		}
-		main.peek(0, 0, 0, cmap);
+		main.pick(0, 0, 0, cmap);
 
 		bw.flush();
 		bw.write(maxSafetyZone + "\n");
@@ -49,8 +49,8 @@ public class Main14502 {
 		bw.close();
 	}
 
-	public void peek(int posR, int posC, int peekCount, int[][] cmap) {
-		if (peekCount == 3) {
+	public void pick(int posR, int posC, int pickCount, int[][] cmap) {
+		if (pickCount == 3) {
 			// 벽 3개 세운 경우, 안전 영역 크기 측정하여 최대값 계산
 			bfs(cmap);
 			return;
@@ -62,18 +62,18 @@ public class Main14502 {
 		if (cmap[posR][posC] == 0) {
 			cmap[posR][posC] = 1;
 			if (posC == M - 1) {
-				peek(posR + 1, 0, peekCount + 1, cmap);
+				pick(posR + 1, 0, pickCount + 1, cmap);
 			} else {
-				peek(posR, posC + 1, peekCount + 1, cmap);
+				pick(posR, posC + 1, pickCount + 1, cmap);
 			}
 
 		}
 		// 현재 자리 뽑지 않을 경우
 		cmap[posR][posC] = map[posR][posC];
 		if (posC == M - 1) {
-			peek(posR + 1, 0, peekCount, cmap);
+			pick(posR + 1, 0, pickCount, cmap);
 		} else {
-			peek(posR, posC + 1, peekCount, cmap);
+			pick(posR, posC + 1, pickCount, cmap);
 		}
 	}
 

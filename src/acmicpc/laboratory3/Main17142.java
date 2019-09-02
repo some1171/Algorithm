@@ -46,7 +46,7 @@ public class Main17142 {
 		}
 		
 		if (!isSuccess) {
-			main.peek(0, 0, new boolean[candiCount]);
+			main.pick(0, 0, new boolean[candiCount]);
 		} else {
 			T = 0;
 		}
@@ -61,22 +61,22 @@ public class Main17142 {
 		bw.close();
 	}
 
-	public void peek(int pos, int count, boolean[] peek) {
+	public void pick(int pos, int count, boolean[] pick) {
 		if (count == M) {
-			bfs(peek);
+			bfs(pick);
 			return;
 		}
 		if (pos == candiCount) {
 			// 끝까지 탐색했으나 다 뽑지 않은 경우 바로 종료
 			return;
 		}
-		peek[pos] = true;
-		peek(pos + 1, count + 1, peek);
-		peek[pos] = false;
-		peek(pos + 1, count, peek);
+		pick[pos] = true;
+		pick(pos + 1, count + 1, pick);
+		pick[pos] = false;
+		pick(pos + 1, count, pick);
 	}
 
-	public void bfs(boolean[] peek) {
+	public void bfs(boolean[] pick) {
 		Queue<Point> queue = new LinkedList<Point>();
 		int[][] nmap = new int[N][N];
 		for (int i = 0; i < N; i++) {
@@ -85,7 +85,7 @@ public class Main17142 {
 			}
 		}
 		for (int i = 0; i < candiCount; i++) {
-			if (peek[i]) {
+			if (pick[i]) {
 				Point p = candi[i];
 				nmap[p.r][p.c] = 1;
 				queue.add(p);
