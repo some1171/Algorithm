@@ -25,6 +25,7 @@ public class Solution1208 {
 			
 			System.out.println("#" + (i + 1) + " " + (boxes[boxes.length - 1] - boxes[0]));
 		}
+		in.close();
 	}
 
 	public static boolean isFlatterned(int[] boxes) {

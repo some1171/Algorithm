@@ -1,7 +1,6 @@
 package datastructure.map.hashtable;
 
 public class Node {
-	@SuppressWarnings("unused")
 	private String key;
 	private String value;
 

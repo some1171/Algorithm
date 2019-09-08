@@ -47,5 +47,6 @@ public class Solution1209 {
 			System.out.println("#" + testCase + " " + max);
 			count++;
 		}
+		in.close();
 	}
 }

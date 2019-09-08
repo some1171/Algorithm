@@ -27,5 +27,6 @@ public class Solution1206 {
 
 			System.out.println("#" + (i + 1) + " " + view);
 		}
+		in.close();
 	}
 }

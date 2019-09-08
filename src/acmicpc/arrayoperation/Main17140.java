@@ -8,18 +8,18 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main17140 {
-	public static int r, c, k, rSize, cSize;
+	public static int R, C, K, T;
+	public static int[][] map = new int[100][100];
 
 	public static void main(String[] args) throws IOException {
-		Main17140 main = new Main17140();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
 		st = new StringTokenizer(br.readLine().trim());
-		r = Integer.parseInt(st.nextToken()) - 1;
-		c = Integer.parseInt(st.nextToken()) - 1;
-		k = Integer.parseInt(st.nextToken());
-		int[][] map = new int[100][100];
+		R = Integer.parseInt(st.nextToken()) - 1;
+		C = Integer.parseInt(st.nextToken()) - 1;
+		K = Integer.parseInt(st.nextToken());
+		T = 0;
 		for (int i = 0; i < 3; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			for (int j = 0; j < 3; j++) {
@@ -27,53 +27,48 @@ public class Main17140 {
 			}
 		}
 
-		int t = 0;
 		while (true) {
-			if (map[r][c] == k) {
+			if (T > 100) {
+				T = -1;
 				break;
 			}
-			rSize = main.getRsize(map);
-			cSize = main.getCsize(map);
+			if (map[R][C] == K) {
+				break;
+			}
+			int rSize = getRsize(map);
+			int cSize = getCsize(map);
 			if (rSize >= cSize) {
-				map = main.operationR(map);
+				map = rOperation(map, rSize, cSize);
 			} else {
-				map = main.operationC(map);
+				map = cOperation(map, rSize, cSize);
 			}
 			
-			t++;
-			if (t == 101) {
-				t = -1;
-				break;
-			}
+			T++;
 		}
 
+		bw.write(T + "\n");
 		bw.flush();
-		bw.write(t + "\n");
 		br.close();
 		bw.close();
 	}
 
-	public int[][] operationR(int[][] map) {
+	public static int[][] rOperation(int[][] map, int rSize, int cSize) {
 		int[][] nmap = new int[100][100];
+
 		for (int i = 0; i < rSize; i++) {
-			int[] counts = new int[101];
-			// 1. 행에 대한 갯수를 센다.
+			int[] count = new int[101];
 			for (int j = 0; j < cSize; j++) {
 				if (map[i][j] == 0) {
 					continue;
 				}
-				counts[map[i][j]]++;
+				count[map[i][j]]++;
 			}
-			// 2. 해당 갯수로 다음 맵의 행을 만든다.
 			int idx = 0;
-			for (int count = 1; count < 101; count++) {
-				for (int number = 1; number < 101; number++) {
-					if (counts[number] == count) {
-						if (idx == 100) {
-							break;
-						}
-						nmap[i][idx++] = number;
-						nmap[i][idx++] = count;
+			for (int c = 1; c < 101; c++) {
+				for (int n = 0; n < 101; n++) {
+					if (count[n] == c) {
+						nmap[i][idx++] = n;
+						nmap[i][idx++] = c;
 					}
 				}
 			}
@@ -81,25 +76,23 @@ public class Main17140 {
 		return nmap;
 	}
 
-	public int[][] operationC(int[][] map) {
+	public static int[][] cOperation(int[][] map, int rSize, int cSize) {
 		int[][] nmap = new int[100][100];
+
 		for (int i = 0; i < cSize; i++) {
-			int[] counts = new int[101];
+			int[] count = new int[101];
 			for (int j = 0; j < rSize; j++) {
 				if (map[j][i] == 0) {
 					continue;
 				}
-				counts[map[j][i]]++;
+				count[map[j][i]]++;
 			}
 			int idx = 0;
-			for (int count = 1; count < 101; count++) {
-				for (int number = 1; number < 101; number++) {
-					if(counts[number] == count) {
-						if (idx == 100) {
-							break;
-						}
-						nmap[idx++][i] = number;
-						nmap[idx++][i] = count;
+			for (int c = 1; c < 101; c++) {
+				for (int n = 0; n < 101; n++) {
+					if (count[n] == c) {
+						nmap[idx++][i] = n;
+						nmap[idx++][i] = c;
 					}
 				}
 			}
@@ -107,7 +100,7 @@ public class Main17140 {
 		return nmap;
 	}
 
-	public int getRsize(int[][] map) {
+	public static int getRsize(int[][] map) {
 		for (int i = 99; i >= 0; i--) {
 			for (int j = 0; j < 100; j++) {
 				if (map[i][j] != 0) {
@@ -115,11 +108,10 @@ public class Main17140 {
 				}
 			}
 		}
-		
 		return 0;
 	}
 
-	public int getCsize(int[][] map) {
+	public static int getCsize(int[][] map) {
 		for (int i = 99; i >= 0; i--) {
 			for (int j = 0; j < 100; j++) {
 				if (map[j][i] != 0) {
@@ -127,7 +119,6 @@ public class Main17140 {
 				}
 			}
 		}
-
 		return 0;
 	}
 }

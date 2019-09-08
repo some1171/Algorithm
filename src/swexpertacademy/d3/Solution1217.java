@@ -27,5 +27,6 @@ public class Solution1217 {
 			System.out.println("#" + testCase + " " + answer);
 			count++;
 		}
+		in.close();
 	}
 }

@@ -1,7 +1,5 @@
 package datastructure.sort.counting;
 
-import java.util.Arrays;
-
 /*
  * Counting Sort: O(n+k) (k는 정수읭 최대값)
  * 제약 사항
@@ -58,10 +56,12 @@ public class Test {
 		return temp;
 	}
 	
+	@SuppressWarnings("unused")
 	private static void countingSortRecursive(int[] data, int[] counts, int[] temp) {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private static void countingSortRecursive(int[] data, int[] counts, int[] temp, int index) {
 		// return
 	}

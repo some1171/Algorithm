@@ -23,6 +23,7 @@ public class Solution1204 {
 			
 			System.out.println("#" + testNumber + " " + maxNumberIndex(scoreFrequency));
 		}
+		in.close();
 	}
 	
 	public static int maxNumberIndex(int[] numbers) {

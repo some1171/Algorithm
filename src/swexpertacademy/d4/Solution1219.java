@@ -49,6 +49,7 @@ public class Solution1219 {
 			}
 			
 			System.out.println("#" + testCase + " " + answer);
-		}	
+		}
+		sc.close();
 	}
 }

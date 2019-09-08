@@ -63,5 +63,6 @@ public class Solution1211 {
 			System.out.println("#" + testCase + " " + start);
 			count++;
 		}
+		in.close();
 	}
 }

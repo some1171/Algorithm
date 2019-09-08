@@ -10,15 +10,13 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main17142 {
-	public static int N, M, T = Integer.MAX_VALUE, candiCount = 0;
+	public static int N, M, C, min = -1;
 	public static int[] dr = { -1, 0, 1, 0 };
 	public static int[] dc = { 0, 1, 0, -1 };
 	public static int[][] map;
-	public static boolean isSuccess;
-	public static Point[] candi = new Point[10];;
+	public static Point[] candi;
 
 	public static void main(String[] args) throws IOException {
-		Main17142 main = new Main17142();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
@@ -26,109 +24,96 @@ public class Main17142 {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		map = new int[N][N];
+		candi = new Point[10];
+		C = 0;
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			for (int j = 0; j < N; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
 				if (map[i][j] == 2) {
-					candi[candiCount++] = new Point(i, j, 0);
+					candi[C++] = new Point(i, j, 0);
 				}
 			}
 		}
-		
-		isSuccess = true;
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				if (map[i][j] == 0) {
-					isSuccess = false;
-				}
-			}
-		}
-		
-		if (!isSuccess) {
-			main.pick(0, 0, new boolean[candiCount]);
-		} else {
-			T = 0;
-		}
-		
-		if (!isSuccess) {
-			T = -1;
-		}
-		
+
+		pick(0, 0, new boolean[C]);
+
+		bw.write(min + "\n");
 		bw.flush();
-		bw.write(T + "\n");
 		br.close();
 		bw.close();
 	}
 
-	public void pick(int pos, int count, boolean[] pick) {
+	public static void pick(int pos, int count, boolean[] isPick) {
 		if (count == M) {
-			bfs(pick);
+			// bfs 탐색 시작
+			bfs(isPick);
 			return;
 		}
-		if (pos == candiCount) {
-			// 끝까지 탐색했으나 다 뽑지 않은 경우 바로 종료
+		if (pos == C) {
 			return;
 		}
-		pick[pos] = true;
-		pick(pos + 1, count + 1, pick);
-		pick[pos] = false;
-		pick(pos + 1, count, pick);
+		// 뽑을 경우
+		isPick[pos] = true;
+		pick(pos + 1, count + 1, isPick);
+		isPick[pos] = false;
+		// 뽑지 않을 경우
+		pick(pos + 1, count, isPick);
 	}
 
-	public void bfs(boolean[] pick) {
+	public static void bfs(boolean[] isPick) {
 		Queue<Point> queue = new LinkedList<Point>();
-		int[][] nmap = new int[N][N];
+		int[][] cmap = new int[N][N];
 		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				nmap[i][j] = map[i][j];
-			}
+			System.arraycopy(map[i], 0, cmap[i], 0, N);
 		}
-		for (int i = 0; i < candiCount; i++) {
-			if (pick[i]) {
+		for (int i = 0; i < C; i++) {
+			if (isPick[i]) {
 				Point p = candi[i];
-				nmap[p.r][p.c] = 1;
-				queue.add(p);
+				int r = p.r;
+				int c = p.c;
+				cmap[r][c] = 3;
+				queue.add(new Point(r, c, 0));
 			}
 		}
-		
 		int time = 0;
-		boolean isFull = false;
 		while (!queue.isEmpty()) {
-			if (isFull) {
+			if (isDone(cmap)) {
+				if (min == -1) {
+					min = time;
+				} else {
+					min = Math.min(min, time);
+				}
 				break;
 			}
 			Point p = queue.poll();
 			int r = p.r;
 			int c = p.c;
 			int t = p.t;
-			for (int i = 0; i < 4; i++) {
-				int nr = r + dr[i];
-				int nc = c + dc[i];
-				int nt = t + 1;
-				if (nr >= 0 && nr < N && nc >= 0 && nc < N && nmap[nr][nc] != 1) {
-					time = nt;
-					nmap[nr][nc] = 1;
-					queue.add(new Point(nr, nc, nt));
-				}
+			if (min != -1 && min <= t + 1) {
+				break;
 			}
-			isFull = true;
-			for (int i = 0; i < N; i++) {
-				if (!isFull) {
-					break;
+			for (int d = 0; d < 4; d++) {
+				int nr = r + dr[d];
+				int nc = c + dc[d];
+				if (nr >= 0 && nr < N && nc >= 0 && nc < N && cmap[nr][nc] != 1 && cmap[nr][nc] != 3) {
+					cmap[nr][nc] = 3;
+					queue.add(new Point(nr, nc, t + 1));
+					time = t + 1;
 				}
-				for (int j = 0; j < N; j++) {
-					if (nmap[i][j] == 0) {
-						isFull = false;
-						break;
-					}
-				}
-			}
-			if (isFull) {
-				isSuccess = true;
-				T = Math.min(T, time);
 			}
 		}
+	}
+
+	public static boolean isDone(int[][] map) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (map[i][j] == 0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
 

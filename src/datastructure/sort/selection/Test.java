@@ -32,6 +32,7 @@ public class Test {
 		printArray(array);
 	}
 
+	@SuppressWarnings("unused")
 	private static void selectionSort(int[] arr) {
 		int min, temp;
 

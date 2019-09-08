@@ -39,14 +39,14 @@ public class dijkstra {
 				distance[i] = INF;
 			}
 			
-			dijkstra();
+			doDijkstra();
 			System.out.printf("#%d %d\n", currentTestCase, distance[end]);
 		}
 		
 		sc.close();
 	}
 	
-	public static void dijkstra() {
+	public static void doDijkstra() {
 		int v = 0;
 		distance[1] = 0;
 		

@@ -18,6 +18,7 @@ public class Test {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private static int[] insertionSort(int[] arr) {
 		return insertionSort(arr, 1);
 	}
@@ -39,6 +40,7 @@ public class Test {
 		return arr;
 	}
 	
+	@SuppressWarnings("unused")
 	private static void printArray(int[] arr) {
 		for (int i : arr) {
 			System.out.print(i + " ");

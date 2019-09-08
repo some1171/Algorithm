@@ -41,5 +41,6 @@ public class Solution1210 {
 			System.out.println("#" + testCase + " " + c);
 			count++;
 		}
+		in.close();
 	}
 }

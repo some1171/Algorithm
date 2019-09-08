@@ -44,6 +44,7 @@ public class Stack<T> {
 		System.out.println();
 	}
 	
+	@SuppressWarnings("hiding")
 	private class Node<T> {
 		private T item;
 		private Node<T> next;
